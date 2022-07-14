@@ -1,0 +1,6 @@
+export const FETCH_FOLDERS = "FETCH_FOLDERS";
+export const ADD_FOLDER = "ADD_FOLDER";
+export const DELETE_FOLDER = "DELETE_FOLDER";
+export const UPDATE_FOLDER = "UPDATE_FOLDER";
+
+export const FETCH_LETTERS = "FETCH_LETTERS";
