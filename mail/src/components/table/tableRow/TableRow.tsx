@@ -6,7 +6,7 @@ type TableRowPropsType = {
 const TableRow = ({ row }: TableRowPropsType) => {
   return (
     <tr className={style.row}>
-      <td>{row.createdAt}</td>
+      <td>{row.createdAt.slice(0, 10) + " " + row.createdAt.slice(12, 19)}</td>
       <td>{row.message}</td>
       <td>{row.author}</td>
     </tr>

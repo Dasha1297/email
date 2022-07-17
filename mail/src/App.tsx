@@ -8,7 +8,8 @@ function App() {
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path='/folder=:folder' element={<MainPage />} />
+        <Route path='/folder=:id' element={<MainPage />} />
+        <Route path='/' element={<MainPage />} />
       </Routes>
     </BrowserRouter>
   );

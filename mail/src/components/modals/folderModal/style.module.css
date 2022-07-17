@@ -1,0 +1,12 @@
+.form {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  justify-content: center;
+}
+
+.menu {
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+}

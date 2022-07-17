@@ -1,37 +1,51 @@
-import { useAppSelector } from "../../hooks/state";
+import { useAppDispatch, useAppSelector } from "../../hooks/state";
 import { Letter } from "../../models/Letter";
 import TableRow from "./tableRow/TableRow";
 import style from "./style.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TablePagination from "../UI/TablePagination/TablePagination";
+import { useLocation } from "react-router-dom";
+import { getMessages } from "../../redux/actions/MessageActions";
 
 const Table = () => {
-  const rows = useAppSelector((state) => state.lettersReducer.letters);
+  const rows = useAppSelector((state) => state.lettersReducer.messages);
+  const count = useAppSelector((state) => state.lettersReducer.totalPages);
+  const currentPage = useAppSelector(
+    (state) => state.lettersReducer.currentPage
+  );
+  const dispatch = useAppDispatch();
 
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber, setPageNumber] = useState(currentPage);
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPageNumber(value);
   };
 
-  const count = rows.length; // 10;
-  console.log(count);
+  const location = useLocation();
+
+  useEffect(() => {
+    dispatch(getMessages(location.pathname, location.search));
+  }, [location, dispatch]);
+
+  console.log(rows);
 
   return (
-    <table className={style.table}>
-      <tbody>
-        {rows.map((row: Letter) => (
-          <TableRow row={row} />
-        ))}
-      </tbody>
-      <tfoot>
+    <div>
+      <table className={style.table}>
+        <tbody>
+          {rows.map((row: Letter, index: number) => (
+            <TableRow row={row} key={index} />
+          ))}
+        </tbody>
+      </table>
+      {rows.lenght > 0 && (
         <TablePagination
-          count={Math.floor(rows.length / 10) + 1}
+          count={count}
           page={pageNumber}
           handleChange={handleChange}
         />
-      </tfoot>
-    </table>
+      )}
+    </div>
   );
 };
 

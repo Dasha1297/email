@@ -1,8 +1,14 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import folderReducer from "./reducers/folderReducer";
 import lettersReducer from "./reducers/lettersReducer";
+import folderModalReducer from "./reducers/folderModalReducer";
 
-const reducer = combineReducers({ folderReducer, lettersReducer });
+const reducer = combineReducers({
+  folderModalReducer,
+  folderReducer,
+  lettersReducer,
+});
+
 const store = configureStore({
   reducer,
 });

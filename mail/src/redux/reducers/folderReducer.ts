@@ -35,10 +35,11 @@ const folderReducer = (state = initialState, action: AnyAction) => {
       return {
         folders: state.folders.map((folder) =>
           folder.id === action.payload.id
-            ? { ...folder, ...action.payload.data }
+            ? { ...folder, ...action.payload }
             : folder
         ),
       };
+
     default:
       return state;
   }
