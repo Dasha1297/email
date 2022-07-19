@@ -1,0 +1,31 @@
+version: "3.1"
+
+services:
+  # Database service
+  postgresdb:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: mail
+    volumes:
+      - data:/var/lib/postgresql/data/
+    ports: ["5432:5432"]
+  #Server service
+  server:
+    image: server
+    build:
+      dockerfile: Dockerfile
+      context: "./server"
+    depends_on:
+      - postgresdb
+    ports: ["5000:5000"]
+  #Client service
+  client:
+    stdin_open: true
+    image: client
+    build:
+      dockerfile: Dockerfile
+      context: "./mail"
+volumes:
+  data:
